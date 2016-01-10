@@ -11,14 +11,21 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-
+        $game = new Game("-");
+$game->display();
+if ($game->winner('x')) {
+    echo 'You win';
+} else if ($game->winner('o')) {
+    echo 'I win.';
+} else {
+    echo 'No Winnner yet';
+}
         // put your code here
         ?>
     </body>
 </html>
 
 <?php
-
 class Game {
 
     var $position; //var to display the position
@@ -26,8 +33,8 @@ class Game {
 
     function __construct($squares) {
         
-        
-        $squares = str_split($this->position);
+        $this->position = $_GET['board'];
+        $$this->position = str_split($squares);
        
     }
 
@@ -97,15 +104,5 @@ class Game {
     }
  
 }
-
-$game = new Game("-");
-$game->display();
-if ($game->winner('x')) {
-    echo 'You win';
-} else if ($game->winner('o')) {
-    echo 'I win.';
-} else {
-    echo 'No Winnner yet';
-}
-
-?>
+        // put your code here
+        ?>
