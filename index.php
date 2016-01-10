@@ -11,9 +11,14 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        if (!isset($_GET['board']))
-            ;
-        $game = new Game("-");
+        $game;
+        if (!isset($_GET['board'])) {
+            $game = new Game("---------");
+        } else {            
+            $game = new Game($_GET['board']);
+        }
+
+        $game->pick_move();
         $game->display();
         if ($game->winner('x')) {
             echo 'You win';
@@ -33,10 +38,11 @@ class Game {
 
     var $position; //var to display the position
     var $board; //var to display board
+    var $newposition;//var to be used to display a newly moved position
 
     function __construct($squares) {
 
-        $this->position = $_GET['board'];
+
         $this->position = str_split($squares);
     }
 
@@ -66,7 +72,7 @@ class Game {
                 for ($row = 0; $row < 3; $row++) { //checks all rows
                     if ($this->position[3 * $row + $col] != $token) {
                         $result = false;
-                    } else if (($position[0] == $token) && ($position[4] == $token) && ($position[8] == $token)) {//checks diagonal
+                    } else if (($this->position[0] == $token) && ($this->position[4] == $token) && ($this->position[8] == $token)) {//checks diagonal
                         $result = true;
                     }
                 }
@@ -101,7 +107,11 @@ class Game {
             $link = '/?board=' . $move; //this is what we want the link to be
             //so return a cell containing an anchor and showing a hyphen
             return '<td><a=href="' . $link . '">-</a></td>';
-        }
+        } else{return '<td>' .'-'. '</td>';}
+    }
+
+    function pick_move() {
+        
     }
 
 }
