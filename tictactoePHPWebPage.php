@@ -11,9 +11,15 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        
-        
-        class Game {
+
+        // put your code here
+        ?>
+    </body>
+</html>
+
+<?php
+
+class Game {
 
     var $position; //var to display the position
     var $board; //var to display board
@@ -101,7 +107,5 @@ if ($game->winner('x')) {
 } else {
     echo 'No Winnner yet';
 }
-        // put your code here
-        ?>
-    </body>
-</html>
+
+?>
