@@ -39,7 +39,7 @@ class Game {
     var $position; //var to display the position
     var $board; //var to display board
     var $newposition;//var to be used to display a newly moved position
-
+    
     function __construct($squares) {
 
 
@@ -106,8 +106,11 @@ class Game {
 
             $link = '/?board=' . $move; //this is what we want the link to be
             //so return a cell containing an anchor and showing a hyphen
-            return '<td><a=href="' . $link . '">-</a></td>';
-        } else{return '<td>' .'-'. '</td>';}
+            return '<td><a href="' . $link . '">-</a></td>';
+        } else{
+            return '<td>' .'-'. '</td>';
+            
+        }
     }
 
     function pick_move() {
