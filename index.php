@@ -50,8 +50,9 @@ class Game {
 
         for ($row = 0; $row < 3; $row++) { //checks all rows
             $result = true;
+            
             for ($col = 0; $col < 3; $col++) {//checks columns
-                if ($this->position[3 * $row + $col] != $token) {
+                if ($this->position[3 * $row + $col] != $token) {//checks the win condition horizontally
                     $result = false;
                 } else if (($this->position[0] == $token) &&
                         ($this->position[4] == $token) &&
@@ -70,13 +71,15 @@ class Game {
             for ($col = 0; $col < 3; $col++) {//checks all columns
                 $result = true;
                 for ($row = 0; $row < 3; $row++) { //checks all rows
-                    if ($this->position[3 * $row + $col] != $token) {
+                    if ($this->position[3 * $row + $col] != $token) { //checks the win condition vertically
                         $result = false;
                     } else if (($this->position[0] == $token) && ($this->position[4] == $token) && ($this->position[8] == $token)) {//checks diagonal
                         $result = true;
                     }
                 }
+                
             }
+            
         }
         return $result;
     }
