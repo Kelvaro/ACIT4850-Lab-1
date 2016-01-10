@@ -11,18 +11,32 @@ and open the template in the editor.
     </head>
     <body>
         <?php
+        $gameover = false;
         $game;
         if (!isset($_GET['board'])) {
             $game = new Game("---------");
-        } else {            
+        } else {
             $game = new Game($_GET['board']);
         }
 
+
+        $game->ai();
+
+
+
+
         $game->pick_move();
+
+
+
+
         $game->display();
+
         if ($game->winner('x')) {
+            $gameover = true;
             echo 'You win';
         } else if ($game->winner('o')) {
+            $gameover = true;
             echo 'I win.';
         } else {
             echo 'No Winnner yet';
@@ -38,8 +52,8 @@ class Game {
 
     var $position; //var to display the position
     var $board; //var to display board
-    var $newposition;//var to be used to display a newly moved position
-    
+    var $newposition; //var to be used to display a newly moved position
+
     function __construct($squares) {
 
 
@@ -50,7 +64,7 @@ class Game {
 
         for ($row = 0; $row < 3; $row++) { //checks all rows
             $result = true;
-            
+
             for ($col = 0; $col < 3; $col++) {//checks columns
                 if ($this->position[3 * $row + $col] != $token) {//checks the win condition horizontally
                     $result = false;
@@ -77,9 +91,7 @@ class Game {
                         $result = true;
                     }
                 }
-                
             }
-            
         }
         return $result;
     }
@@ -102,21 +114,26 @@ class Game {
         //deal with the easy case
         if ($token <> '-') {
             return '<td>' . $token . '</td>';
-            //now the hard case
-            $this->newposition = $this->position; //copy the original
-            $this->newposition[$which] = 'o'; //this would be their move
-            $move = implode($this->newposition); // make a string from the board array
+        }        //now the hard case
+        $this->newposition = $this->position; //copy the original
+        $this->newposition[$which] = 'x'; //this would be their move
+        $move = implode($this->newposition); // make a string from the board array
 
-            $link = '/?board=' . $move; //this is what we want the link to be
-            //so return a cell containing an anchor and showing a hyphen
-            return '<td><a href="' . $link . '">-</a></td>';
-        } else{
-            return '<td>' .'-'. '</td>';
-            
-        }
+        $link = 'http://localhost:4850/ACIT4850-Lab-1/?board=' . $move; //this is what we want the link to be
+        //so return a cell containing an anchor and showing a hyphen
+        return '<td><a href="' . $link . '">-</a></td>';
     }
 
     function pick_move() {
+
+        if ($gameover = false) {
+            $game->display();
+        } else if ($gameover = true){
+            return;
+        }
+    }
+
+    function ai() {
         
     }
 
