@@ -67,12 +67,16 @@ class Game {
         echo '<tr>';//open the first row
         for ($pos=0; $pos<9; $pos++){
             echo $this->show_cell($pos);
-            if ($pos %3 ==2) echo'</tr><tr>';//start a new row for the next square
+            if ($pos % 3 == 2) {
+                echo'</tr><tr>';
+            }//start a new row for the next square
         }
         echo '</tr>'; //close the last row
         echo '</table>';
         
-    function show_cell($which){
+
+    }
+        function show_cell($which){
         $token = $this->position[$which];
         //deal with the easy case
         if($token <> '-'){
@@ -86,7 +90,6 @@ class Game {
             //so return a cell containing an anchor and showing a hyphen
             return '<td><a=href="'.$link.'">-</a></td>';
         }
-    }
     }
  
 }
