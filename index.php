@@ -11,16 +11,15 @@ and open the template in the editor.
     </head>
     <body>
         <?php
-        $gameover = false;
         $game;
-        if (!isset($_GET['board'])) {
-            $game = new Game("---------");
+        if (!isset($_GET['board'])) { //checks if the board parameter has been given
+            $game = new Game("---------");//if not a default dash of strings will be set
         } else {
             $game = new Game($_GET['board']);
         }
 
 
-        $game->ai();
+
 
 
 
@@ -39,6 +38,7 @@ and open the template in the editor.
             $gameover = true;
             echo 'I win.';
         } else {
+         
             echo 'No Winnner yet';
         }
         // put your code here
@@ -116,7 +116,7 @@ class Game {
             return '<td>' . $token . '</td>';
         }        //now the hard case
         $this->newposition = $this->position; //copy the original
-        $this->newposition[$which] = 'x'; //this would be their move
+        $this->newposition[$which] = 'o'; //this would be their move
         $move = implode($this->newposition); // make a string from the board array
 
         $link = 'http://localhost:4850/ACIT4850-Lab-1/?board=' . $move; //this is what we want the link to be
@@ -124,17 +124,12 @@ class Game {
         return '<td><a href="' . $link . '">-</a></td>';
     }
 
-    function pick_move() {
-
-        if ($gameover = false) {
-            $game->display();
-        } else if ($gameover = true){
-            return;
+    function pick_move() {// ai picks the move available from a random generator
+        $token = $this->position[$which];
+        //deal with the easy case
+        if ($token <> '-') {
+            return '<td>' . $token . '</td>';
         }
-    }
-
-    function ai() {
-        
     }
 
 }
