@@ -13,7 +13,7 @@ and open the template in the editor.
         <?php
         $game;
         if (!isset($_GET['board'])) { //checks if the board parameter has been given
-            $game = new Game("---------");//if not a default dash of strings will be set
+            $game = new Game("---------"); //if not a default dash of strings will be set
         } else {
             $game = new Game($_GET['board']);
         }
@@ -38,7 +38,7 @@ and open the template in the editor.
             $gameover = true;
             echo 'I win.';
         } else {
-         
+
             echo 'No Winnner yet';
         }
         // put your code here
@@ -125,10 +125,15 @@ class Game {
     }
 
     function pick_move() {// ai picks the move available from a random generator
-        $token = $this->position[$which];
+        $finished = true;
+        
         //deal with the easy case
-        if ($token <> '-') {
-            return '<td>' . $token . '</td>';
+        while ($finished == true) {
+            $gamble = mt_rand(0, 8);
+            if ($this->position[$gamble] == '-') {
+                $this->position[$gamble] ='x';
+                $finished = false;
+            }
         }
     }
 
